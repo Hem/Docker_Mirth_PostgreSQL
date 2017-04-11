@@ -1,0 +1,6 @@
+# ignore directories
+data/
+input/
+output/
+temp/
+

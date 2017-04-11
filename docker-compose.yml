@@ -1,0 +1,32 @@
+version: '2'
+services:
+  app:
+    build: .
+    volumes:
+      - ./input:/home/files/input
+      - ./output:/home/files/output
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    environment:
+      MIRTH_DB_USERNAME: mirth
+      MIRTH_DB_PASSWORD: mirth
+      MIRTH_DB_HOST: db
+      MIRTH_DB_NAME: mirthdb
+      KEYSTORE_PASS: p\*AA[7E>s`5E2bx
+      KEYSTORE_KEYPASS: p\*AA[7E>s`5E2bx
+    depends_on:
+      - db
+  db:
+    image: postgres:9.6.2
+    environment:
+      POSTGRES_PASSWORD: mirth
+      POSTGRES_USER: mirth
+      POSTGRES_DB: mirthdb
+    ports:
+     - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+volumes:
+  data:
+    driver: local
